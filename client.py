@@ -21,9 +21,11 @@ class Client(object):
 
         """ buscar titulo """
         bs = bs4.BeautifulSoup(htmlpage, "lxml")
-        title = bs.find("div", "dotd-title").text
-        title.lstrip().rstrip()
-        print title
+        book_title = bs.find("div", "dotd-title").text
+
+        """ reducir formato del titulo """
+        book_title = book_title.lstrip().rstrip() #Formato: /t "titulo" /t
+        print book_title
 
 
 if __name__ == "__main__":
