@@ -9,6 +9,7 @@ Get free book title
 import urllib2
 import bs4
 
+
 class Client(object):
 
     def get_title(self):
@@ -21,8 +22,9 @@ class Client(object):
         """ buscar titulo """
         bs = bs4.BeautifulSoup(htmlpage, "lxml")
         title = bs.find("div", "dotd-title").text
-        title.strip('')
+        title.lstrip().rstrip()
         print title
+
 
 if __name__ == "__main__":
     fbook = Client()
