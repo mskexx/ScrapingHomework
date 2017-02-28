@@ -11,23 +11,33 @@ import bs4
 
 
 class Client(object):
+    """Client class """
 
-    def get_title(self):
-        """ obtener html"""
+    def get_webpage(self):
+        """Obtain html in order to search the title after"""
+        # get html
         url_page = "https://www.packtpub.com/packt/offers/free-learning/"
         web = urllib2.urlopen(url_page)
         htmlpage = web.read()
         web.close()
+        return htmlpage
 
-        """ buscar titulo """
-        bs = bs4.BeautifulSoup(htmlpage, "lxml")
+    def get_title(self, html):
+        """html --> search title --> format title"""
+        # search title
+        bs = bs4.BeautifulSoup(html, "lxml")
         book_title = bs.find("div", "dotd-title").text
 
-        """ reducir formato del titulo """
-        book_title = book_title.lstrip().rstrip() #Formato: /t "titulo" /t
-        print book_title
+        # format title
+        return book_title.lstrip().rstrip()  # Format: /t "title" /t
+
+    def main(self):
+        """main function"""
+        web = self.get_webpage()
+        title = self.get_title(web)
+        print title
 
 
 if __name__ == "__main__":
     fbook = Client()
-    fbook.get_title()
+    fbook.main()
